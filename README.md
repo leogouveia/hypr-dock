@@ -6,7 +6,7 @@ organização e interação, mantendo uma relação clara com o projeto original
 
 ## Estado deste fork
 
-**Adaptação Lua disponível na branch `feat/hyprland-lua`.** Ela foi migrada do
+**Adaptação Lua disponível na branch `feature/hyprland-lua`.** Ela foi migrada do
 checkout experimental, cuja instalação foi retirada. O fork não é instalado
 automaticamente. A base original é `468590b84fbce53911a736a266f516861aabf171`.
 
@@ -72,6 +72,31 @@ não significa que ela já esteja disponível ou tenha sido testada.
 - Avaliar atualizações do upstream antes de incorporá-las; não substituir o
   executável em uso sem uma etapa explícita de instalação e reversão.
 - Preparar correções gerais para contribuição ao upstream quando solicitado.
+
+### Gitflow do fork
+
+| Branch | Finalidade |
+| --- | --- |
+| `main` | Versões estáveis; sem as adaptações ainda em desenvolvimento. |
+| `develop` | Base e integração das funcionalidades do fork. |
+| `feature/*` | Uma funcionalidade por branch, criada a partir de `develop`. |
+| `release/*` | Preparação de versões para integração em `main` e `develop`. |
+| `hotfix/*` | Correções urgentes a partir de `main`, integradas também em `develop`. |
+
+As adaptações atuais estão em `feature/hyprland-lua` e ainda não foram
+integradas em `develop` ou `main`. `develop` foi criada na base do fork anterior
+às adaptações. Branches herdadas do projeto original não são usadas para nosso
+desenvolvimento, e o remoto `upstream` não recebe nossos pushes.
+
+Fluxo de uma próxima funcionalidade, com o diretório de trabalho limpo:
+
+```sh
+git switch develop
+git switch -c feature/nome-da-funcionalidade
+```
+
+Revisão, validação e integração em `develop` são etapas posteriores. Não é
+necessário instalar uma extensão Gitflow para seguir essa organização.
 
 O clone de desenvolvimento fica em `~/Developer/hypr-dock-fork`. O antigo
 checkout experimental `~/Developer/hypr-dock` e sua instalação de teste foram

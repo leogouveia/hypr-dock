@@ -4,7 +4,7 @@
 
 Este repositório é o fork `leogouveia/hypr-dock`, baseado em
 `lotos-linux/hypr-dock`. A preparação inicial alterou somente a documentação. A branch
-`feat/hyprland-lua` recebe as adaptações de IPC e seus testes, por autorização
+`feature/hyprland-lua` recebe as adaptações de IPC e seus testes, por autorização
 posterior. Não tratar os demais objetivos do README como funcionalidades prontas.
 
 A migração de código não instala o fork. Instalação, autostart e mudanças em
@@ -49,7 +49,17 @@ configurações pessoais devem seguir o escopo da solicitação vigente do usuá
 ## Branches, atualização e contribuições
 
 - `origin` deve apontar para o fork; `upstream`, para o projeto original.
-- Criar uma branch por correção ou funcionalidade quando começar implementação.
+- Usar Gitflow no fork: `main` para versões estáveis, `develop` para integração,
+  `feature/*` para funcionalidades, `release/*` para preparação de versões e
+  `hotfix/*` para correções urgentes de uma versão estável.
+- Criar novas `feature/*` a partir de `develop`; integrar de volta em `develop`
+  somente após revisão e validação, quando autorizado. Não desenvolver direto
+  em `main` ou `develop`.
+- A branch `feature/hyprland-lua` contém a adaptação inicial ainda não integrada.
+- Manter branches herdadas do upstream separadas das nossas funcionalidades;
+  não reutilizá-las nem publicar alterações no remoto `upstream`.
+- Preparar atualizações do upstream em uma `feature/*` dedicada e revisar o
+  diff antes de integrá-las; não sobrescrever as branches do fork.
 - Manter commits de compatibilidade, recursos e documentação separados quando
   forem mudanças independentes.
 - Não usar force-push, rebase destrutivo ou sobrescrever trabalho local alheio.
