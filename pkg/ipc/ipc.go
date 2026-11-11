@@ -7,10 +7,14 @@ import (
 )
 
 func Hyprctl(cmd string) (response []byte, err error) {
+	cmd = luaCommand(cmd)
 	conn, err := net.Dial("unix", getUnixSockAdress())
 	if err != nil {
 		return nil, err
 	}
+	defer conn.Close()
+	// A stalled compositor must not leave the GTK callback blocked forever.
+	conn.SetDeadline(time.Now().Add(2 * time.Second))
 
 	message := []byte(cmd)
 	_, err = conn.Write(message)
@@ -23,8 +27,6 @@ func Hyprctl(cmd string) (response []byte, err error) {
 	if err != nil {
 		return nil, err
 	}
-
-	defer conn.Close()
 
 	return response[:n], nil
 }
