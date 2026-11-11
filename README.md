@@ -1,3 +1,60 @@
+# hypr-dock — fork de Leonardo Gouveia
+
+Fork de [lotos-linux/hypr-dock](https://github.com/lotos-linux/hypr-dock), um dock
+em Go e GTK3 para Hyprland. O objetivo é desenvolver melhorias incrementais de
+organização e interação, mantendo uma relação clara com o projeto original.
+
+## Estado deste fork
+
+**Preparação inicial: somente documentação.** Nesta etapa, o código e as
+configurações distribuídas pelo fork permanecem iguais aos do upstream na base
+`468590b84fbce53911a736a266f516861aabf171`. Este fork ainda não contém as adaptações
+Lua experimentadas em outro checkout local e não é uma versão instalada.
+
+Ambiente que orientará os testes: Hyprland 0.57.x com configuração Lua, janelas
+flutuantes e Waybar existente. A compatibilidade desse código original com os
+dispatchers Lua **ainda precisa ser implementada e validada neste fork**.
+
+## Melhorias planejadas — ainda não implementadas
+
+- Compatibilidade com os dispatchers Lua da versão de Hyprland em uso.
+- Separação visual entre favoritos e aplicativos abertos não fixados.
+- Atualização da organização ao fixar ou desafixar um aplicativo.
+- Indicação do aplicativo ativo, distinta da quantidade de janelas abertas.
+- Reordenação de favoritos por arrasto, com persistência da ordem.
+- Processo simples de atualização, validação e reversão do executável.
+
+Cada funcionalidade deverá ser tratada separadamente. A inclusão nesta lista
+não significa que ela já esteja disponível ou tenha sido testada.
+
+## Organização e manutenção
+
+- `origin`: [leogouveia/hypr-dock](https://github.com/leogouveia/hypr-dock).
+- `upstream`: [lotos-linux/hypr-dock](https://github.com/lotos-linux/hypr-dock).
+- Preservar a autoria, a licença e a documentação original.
+- Desenvolver mudanças em branches específicas, com commits pequenos e testes
+  proporcionais; evitar misturar aparência pessoal com correções do aplicativo.
+- Manter as configurações pessoais fora do código-fonte.
+- Avaliar atualizações do upstream antes de incorporá-las; não substituir o
+  executável em uso sem uma etapa explícita de instalação e reversão.
+- Preparar correções gerais para contribuição ao upstream quando solicitado.
+
+O clone inicial deste fork fica em `~/Developer/hypr-dock-fork`. O checkout de
+experimentos já existente em `~/Developer/hypr-dock` é separado e não é alterado
+por esta preparação.
+
+As orientações para trabalhar no repositório estão em [AGENTS.md](AGENTS.md).
+
+## Documentação original do upstream
+
+O conteúdo abaixo foi preservado como referência do projeto original. Os
+comandos de instalação, os exemplos na sintaxe tradicional do Hyprland e o
+pacote AUR referem-se ao upstream; não representam compatibilidade Lua validada
+ou uma distribuição própria deste fork. Nenhuma instalação é necessária para
+esta etapa de preparação.
+
+---
+
 # hypr-dock
 ### Interactive dock panel for Hyprland
 
