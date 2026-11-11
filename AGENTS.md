@@ -3,12 +3,12 @@
 ## Contexto e estado inicial
 
 Este repositório é o fork `leogouveia/hypr-dock`, baseado em
-`lotos-linux/hypr-dock`. Na preparação inicial, apenas README.md e este arquivo
-foram alterados. Não tratar os objetivos do README como funcionalidades prontas.
+`lotos-linux/hypr-dock`. A preparação inicial alterou somente a documentação. A branch
+`feat/hyprland-lua` recebe as adaptações de IPC e seus testes, por autorização
+posterior. Não tratar os demais objetivos do README como funcionalidades prontas.
 
-A etapa inicial não autoriza instalação, compilação, migração de configurações
-ou aplicação das adaptações existentes em outros checkouts. Trabalhos futuros
-devem seguir o escopo da solicitação vigente do usuário.
+A migração de código não instala o fork. Instalação, autostart e mudanças em
+configurações pessoais devem seguir o escopo da solicitação vigente do usuário.
 
 ## Forma de trabalhar
 

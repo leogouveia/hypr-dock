@@ -6,18 +6,52 @@ organização e interação, mantendo uma relação clara com o projeto original
 
 ## Estado deste fork
 
-**Preparação inicial: somente documentação.** Nesta etapa, o código e as
-configurações distribuídas pelo fork permanecem iguais aos do upstream na base
-`468590b84fbce53911a736a266f516861aabf171`. Este fork ainda não contém as adaptações
-Lua experimentadas em outro checkout local e não é uma versão instalada.
+**Adaptação Lua disponível na branch `feat/hyprland-lua`.** Ela foi migrada do
+checkout experimental, cuja instalação foi retirada. O fork não é instalado
+automaticamente. A base original é `468590b84fbce53911a736a266f516861aabf171`.
 
-Ambiente que orientará os testes: Hyprland 0.57.x com configuração Lua, janelas
-flutuantes e Waybar existente. A compatibilidade desse código original com os
-dispatchers Lua **ainda precisa ser implementada e validada neste fork**.
+Ambiente validado: Hyprland 0.57.2 com configuração Lua, janelas flutuantes e
+Waybar existente. A adaptação é opt-in: `HYPR_DOCK_LUA=1` traduz os comandos
+legados de foco e fechamento para dispatchers Lua. Sem essa variável, esses
+comandos permanecem no formato original.
+
+Ao ativar pelo dock, a janela recebe foco e é elevada, preservando a posição do
+cursor. A supressão de warps vale somente durante a ação Lua síncrona; a
+preferência anterior é restaurada mesmo em caso de erro. A comunicação no
+socket tem prazo de dois segundos e fecha a conexão também em caso de falha.
+Isso não adiciona suporte Lua genérico a todos os comandos ou ferramentas do
+repositório; foco e fechamento são os comandos traduzidos nesta etapa.
+
+## Validação da adaptação
+
+Teste de pacote sem sessão gráfica (o teste gráfico é ignorado por padrão):
+
+```sh
+go test ./pkg/ipc
+```
+
+Teste gráfico explícito, executado dentro do Hyprland:
+
+```sh
+python3 tests/integration/hypr-dock-focus-test.py
+```
+
+O teste cria e fecha duas janelas descartáveis sobrepostas, usa a entrada IPC
+real do aplicativo e verifica foco, sobreposição por amostra de pixels, posição
+do cursor e restauração de `cursor.no_warps`. O cursor é levado temporariamente
+à borda inferior para reproduzir a ativação pelo dock e restaurado ao final.
+Requer Go, Python com PyGObject/GTK3, `grim`, `hyprctl` e monitor sem rotação com
+escala 1; não é executado automaticamente em CI. `GO_BINARY` permite selecionar
+outro executável Go. A confirmação de funcionamento não implica cobertura de
+todos os comportamentos de mouse, configurações de foco ou múltiplos monitores.
+
+A prévia estática foi observada funcionando na instalação experimental anterior.
+O teste automatizado atual cobre ativação; não automatiza cliques GTK reais nem
+valida o fechamento de aplicativos. Autostart, minimização e atualização com
+reversão ainda não foram implementados neste fork.
 
 ## Melhorias planejadas — ainda não implementadas
 
-- Compatibilidade com os dispatchers Lua da versão de Hyprland em uso.
 - Separação visual entre favoritos e aplicativos abertos não fixados.
 - Atualização da organização ao fixar ou desafixar um aplicativo.
 - Indicação do aplicativo ativo, distinta da quantidade de janelas abertas.
@@ -39,9 +73,10 @@ não significa que ela já esteja disponível ou tenha sido testada.
   executável em uso sem uma etapa explícita de instalação e reversão.
 - Preparar correções gerais para contribuição ao upstream quando solicitado.
 
-O clone inicial deste fork fica em `~/Developer/hypr-dock-fork`. O checkout de
-experimentos já existente em `~/Developer/hypr-dock` é separado e não é alterado
-por esta preparação.
+O clone de desenvolvimento fica em `~/Developer/hypr-dock-fork`. O antigo
+checkout experimental `~/Developer/hypr-dock` e sua instalação de teste foram
+retirados após a migração. Preferências pessoais foram preservadas em backup
+local e não fazem parte do Git.
 
 As orientações para trabalhar no repositório estão em [AGENTS.md](AGENTS.md).
 
@@ -49,9 +84,9 @@ As orientações para trabalhar no repositório estão em [AGENTS.md](AGENTS.md)
 
 O conteúdo abaixo foi preservado como referência do projeto original. Os
 comandos de instalação, os exemplos na sintaxe tradicional do Hyprland e o
-pacote AUR referem-se ao upstream; não representam compatibilidade Lua validada
-ou uma distribuição própria deste fork. Nenhuma instalação é necessária para
-esta etapa de preparação.
+pacote AUR referem-se ao upstream; não representam uma distribuição própria
+deste fork. Para as ações Lua documentadas acima, é necessário optar por
+`HYPR_DOCK_LUA=1`. Nenhuma instalação é executada pelos testes descritos aqui.
 
 ---
 
